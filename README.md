@@ -229,44 +229,18 @@ Success will return status code 200. Failure will return error.
 
 *  **Request Body:**
  
+     ```
+   {
+      "title": The Best Lasagna,  #required
+      "source": "Family Secret",  #required
+      "category_id": 1            #required
+   }
    ```
-      {
-          "title": The Best Lasagna,  #required
-          "source": "Family Secret",  #required
-          "category_id": 1            #required
-      }
-  ```
-
+  
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** 
-    
-    ```
-    [
-      {
-          "recipe_id": 1,
-          "user_id": 1,
-          "title": Update Title,
-          "source": "Update Source",
-          "category_id": 3
-      },
-      {
-          "recipe_id": 2,
-          "user_id": 1,
-          "title": Another Title,
-          "source": "Another Source",
-          "category_id": 2
-      },
-      {
-          "recipe_id": 3
-          "user_id": 1
-          "title": The Best Lasagna,
-          "source": "Family Secret",
-          "category_id": 1
-      }
-    ]
-    ```
+    **Content:** `{ message: 'Successfully added new review to database.' }`    
  
 * **Error Response:**
 
