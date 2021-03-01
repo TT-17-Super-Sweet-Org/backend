@@ -1,51 +1,44 @@
 const router = require('express').Router()
 const bcrypt = require('bcryptjs')
-const User = require('../users/users-model')
+const Users = require('../users/users-model')
 const jwt = require('jsonwebtoken')
 const { jwtSecret } = require('../../config/secret')
-const { isValid } = require('../users/users-service')
+const { uniqueUsername, validateUser } = require('../middleware/auth-middleware')
 
-router.post('/register', (req,res) =>{
+router.post('/register', uniqueUsername, validateUser, (req, res, next) =>{
     const credentials = req.body
+    const rounds = process.env.BCRYPT_ROUNDS || 10
+    const hash = bcrypt.hashSync(req.body.password, rounds)
 
-    if(isValid(credentials)){
-        const rounds = process.env.BCRYPT_ROUNDS || 10
-        const hash = bcrypt.hashSync(req.body.password, rounds)
+    credentials.password = hash
+    // console.log(credentials)
+    Users.add(credentials)
+    .then((newUser) =>{
+        res.status(200).json(newUser)
+    })
+    .catch((error) =>{
+        next(error)
+    })
+})
 
-        credentials.password = hash
+router.post('/login', validateUser, async (req, res) =>{
+    const { username, password } = req.body
+    const user = await Users.getBy(username)
 
-        User.insertUser(credentials)
-        .then((user) =>{
-            res.status(201).json(user)
-        })
-        .catch((error) =>{
-            res.status(400).json({message: 'Username taken'})
-        })
+    if(user && bcrypt.compareSync(password, user.password)){
+        const token = makeToken(user)
+        res.status(200).json({message: 'Welcome to our API ', token})
     } else{
-        res.status(400).json({message: 'Username ans password required'})
+        res.status(400).json({message: 'Invalid credentials'})
     }
 })
 
-router.post('/login', (req, res) =>{
-    const { username, password } = req.body
-
-    if(isValid(req.body)){
-        User.getBy({username: username })
-        .then(([user]) =>{
-            if(user && bcrypt.compareSync(password, user.password)){
-                const token = makeToken(user)
-
-                res.status(200).json({message: `Welcome ${user.username}`, token})
-            } else{
-                res.status(400).json({message: 'Invalid Credentials'})
-            }
-        })
-        .catch((error) =>{
-            res.status(500).json({message: error.message})
-        })
-    } else{
-        res.status(400).json({message: 'Username and password required'})
-    }
+router.use((error, req, res, next) =>{
+    res.status(500).json({
+        info: 'An error occured inside the authRouter',
+        message: error.message,
+        stack: error.stack,
+    })
 })
 
 function makeToken(user){

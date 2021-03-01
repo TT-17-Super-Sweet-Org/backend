@@ -4,7 +4,7 @@ module.exports ={
     get,
     getBy,
     getById,
-    insertUser,
+    add,
     updateUser,
 }
 
@@ -20,7 +20,7 @@ function getById(id) {
     return db('users').where('user_id', id).first()
 }
 
-async function insertUser(user) {
+async function add(user) {
     const [id] = await db('users').insert(user, 'user_id')
     return getById(id)
 }
