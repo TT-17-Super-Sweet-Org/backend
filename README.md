@@ -19,8 +19,8 @@ Success will return status code 200. Failure will return error.
 |POST | /auth/login | login an existing user | N |
 |GET | /recipes | returns recipes for that user_id | Y |
 |GET | /recipes/:id | returns recipe for that recipe_id | Y |
-|PUT | /recipes/:id | update recipe for that recipe_id | Y |
-|POST | /newrecipe | save a new recipe to db | Y |
+|PUT | /recipes/:id | updates recipe for that recipe_id | Y |
+|POST | /newrecipe | saves a new recipe to db | Y |
 </br>
 
 ---
@@ -54,7 +54,7 @@ Success will return status code 200. Failure will return error.
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ message : "Required field(s) username or password incorrect" }`
+    **Content:** `{ message : "Required field(s) username or password is incomplete" }`
 
   OR
 
@@ -81,14 +81,14 @@ Success will return status code 200. Failure will return error.
     
     ```
     {
-        "message": "Welcome to the API, ${username}"
+        "message": `Welcome to the API, ${username}`
     }
     ```
  
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ message : "Required field(s) Username or password is missing" }`
+    **Content:** `{ message : "Required field(s) is missing" }`
 
   OR
 
@@ -120,14 +120,14 @@ Success will return status code 200. Failure will return error.
       {
           "recipe_id": 1,
           "user_id": 1,
-          "title": Example Title,
+          "title": "Example Title",
           "source": "Example Source",
           "category_id": 1
       },
       {
           "recipe_id": 2,
           "user_id": 1,
-          "title": Another Title,
+          "title": "Another Title",
           "source": "Another Source",
           "category_id": 2
       },
@@ -137,7 +137,7 @@ Success will return status code 200. Failure will return error.
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ message: 'Provided user_id has no recipes saved.' }`
+    **Content:** `{ message: 'This user has no recipes saved.' }`
 
   OR
 
@@ -240,7 +240,7 @@ Success will return status code 200. Failure will return error.
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** `{ message: 'Successfully added new review to database.' }`    
+    **Content:** `{ message: 'Successfully added new recipe to database.' }`    
  
 * **Error Response:**
 
