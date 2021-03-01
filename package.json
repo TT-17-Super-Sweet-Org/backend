@@ -4,6 +4,15 @@
   "description": "`https://cookbook-backend-api.herokuapp.com/api`",
   "main": "index.js",
   "scripts": {
+    "start": "nade index.js",
+    "server": "nodemon index.js",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
+    "migrateh": "heroku run knex migrate:latest -a heroku-app-name-goes-here",
+    "rollbackh": "heroku run knex migrate:rollback -a heroku-app-name-goes-here",
+    "databaseh": "heroku pg:psql -a heroku-app-name-goes-here",
+    "seedh": "heroku run knex seed:run -a heroku-app-name-goes-here",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
