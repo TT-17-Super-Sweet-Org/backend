@@ -5,7 +5,7 @@
 ### API Base URL 
 `https://tt17-secret-family-recipe.herokuapp.com/api`
 
-### To confirm the API is online...
+### To confirm the API is online:
 Send a GET request to the base URL. No headers or body is required for this test. Success will return status code 200 and message. Failure will return error.
 
 ## 2️⃣ Endpoints Overview
@@ -44,16 +44,16 @@ Send a GET request to the base URL. No headers or body is required for this test
     ```
     {
         "user_id": 1,
-        "username": "coolChef",
-        "created_at": "2021-03-01 19:56:28",
-        "updated_at": "2021-03-01 19:56:28"
+        "username": "coolChef", 
+        "password": (encrypted token)
     }
     ```
  
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ message : "Required field(s) username or password is incomplete" }`
+    **Content:**
+    `{ message : "Username taken" }` or `{ message : "Username or password missing" }`
 
   OR
 
@@ -80,14 +80,15 @@ Send a GET request to the base URL. No headers or body is required for this test
     
     ```
     {
-        "message": `Welcome to the API, ${username}`
+        "message": `Welcome to the API, ${username}`,
+        "token": (private token)
     }
     ```
  
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ message : "Required field(s) is missing" }`
+    **Content:** `{ message : "Username or password missing" }`
 
   OR
 
@@ -118,13 +119,24 @@ Send a GET request to the base URL. No headers or body is required for this test
   
 * **Success Response:**
 
-  * **Code:** 200 <br />
-    **Content:** `{ message: 'Successfully added new recipe to database.' }`    
+  * **Code:** 201 <br />
+    **Content:** 
+    
+    ```
+    {
+        "title": "The Best Lasagna",  #required
+      "source": "Family Secret",  #required
+      "category": "dinner",        #required
+      "instructions": "add ground beef, layered with the goodness of sheet lasagna    pasta, and sprinkle mozzamagic", #required
+      "ingredients": "1lb of ground beef, sheet lasagna pasta, 3 cups mozzarella" #required
+      "username": "coolChef"        #required
+    }
+    ```
  
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ message: 'At least one required field is missing' }`
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ message: "All fields must be filled out :'(" }`
 
   OR
 
@@ -252,6 +264,11 @@ Send a GET request to the base URL. No headers or body is required for this test
 
   * **Code:** 404 NOT FOUND <br />
     **Content:** `{ message: 'Provided recipe_id does not exist.' }`
+
+  OR
+  
+   * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ message: "All fields must be filled out :'(" }`
 
   OR
 
