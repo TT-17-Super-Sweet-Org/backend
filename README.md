@@ -245,8 +245,7 @@ Success will return status code 200 and message. Failure will return error.
       "instructions": "add ground beef, sub sheet lasagna with sliced eggplants, and sprinkle mozzamagic", 
       "ingredients": "1lb of ground beef, sliced eggplants, 3 cups mozzarella", 
       "username": "coolChef"     
-      }   
-      }
+      } 
     ]
     ```
  
