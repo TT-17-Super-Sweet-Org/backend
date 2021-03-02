@@ -1,10 +1,10 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "`https://cookbook-backend-api.herokuapp.com/api`",
+  "description": "`https://supersweetorg.herokuapp.com/api`",
   "main": "index.js",
   "scripts": {
-    "start": "nade index.js",
+    "start": "node index.js",
     "server": "nodemon index.js",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
