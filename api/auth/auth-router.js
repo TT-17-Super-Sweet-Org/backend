@@ -6,15 +6,15 @@ const { jwtSecret } = require('../../config/secret')
 const { uniqueUsername, validateUser } = require('../middleware/auth-middleware')
 
 router.post('/register', uniqueUsername, validateUser, (req, res, next) =>{
-    const credentials = req.body
+    const user = req.body
     const rounds = process.env.BCRYPT_ROUNDS || 10
     const hash = bcrypt.hashSync(req.body.password, rounds)
 
-    credentials.password = hash
-    // console.log(credentials)
-    Users.add(credentials)
-    .then((newUser) =>{
-        res.status(200).json(newUser)
+    user.password = hash
+
+    Users.add(user)
+    .then((addUser) =>{
+        res.status(200).json(addUser)
     })
     .catch((error) =>{
         next(error)

@@ -5,10 +5,10 @@ module.exports = {
     validateUser
 }
 
-function uniqueUsername(req, res, next){
-    let { username } = req.body
-
-    let user = Users.getBy(username)
+async function uniqueUsername(req, res, next){
+    const { username } = req.body
+    console.log(username)
+    const user = await Users.getBy(username)
     if(!user){
         next()
     } else{

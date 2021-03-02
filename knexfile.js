@@ -1,5 +1,4 @@
-// Update with your config settings.
-require('dotenv').config()
+require('dotenv').config({path: './.env'})
 const pg = require('pg')
 
 
