@@ -6,9 +6,8 @@
 `https://tt17-secret-family-recipe.herokuapp.com/api`
 
 ### To confirm the API is online...
-Send a GET request to the base URL. No headers or body is required for this test. 
-Success will return status code 200 and message. Failure will return error.  
----
+Send a GET request to the base URL. No headers or body is required for this test. Success will return status code 200 and message. Failure will return error.
+
 ## 2️⃣ Endpoints Overview
 
 ### All Endpoints
