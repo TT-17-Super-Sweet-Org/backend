@@ -29,7 +29,7 @@ router.post('/login', validateUser, async (req, res) =>{
         const token = makeToken(user)
         res.status(200).json({message: `Welcome to our API ${user.username}`, token})
     } else{
-        res.status(400).json({message: 'Invalid credentials'})
+        res.status(401).json({message: 'Invalid credentials'})
     }
 })
 
