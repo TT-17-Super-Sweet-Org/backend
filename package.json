@@ -4,7 +4,7 @@
   "description": "`https://cookbook-backend-api.herokuapp.com/api`",
   "main": "index.js",
   "scripts": {
-    "start": "nade index.js",
+    "start": "node index.js",
     "server": "nodemon index.js",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
