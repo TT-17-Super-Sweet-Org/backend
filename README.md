@@ -102,130 +102,7 @@ Success will return status code 200 and message. Failure will return error.
   
 ---
 
-### ***GET /recipes***
-
-*  **Request Body:**
- 
-   ```
-   no body required. empty body accepted.
-   ```
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:** 
-    
-    ```
-    [
-      {
-          "recipe_id": 1,
-          "user_id": 1,
-          "title": "Example Title",
-          "source": "Example Source",
-          "category_id": 1
-      },
-      {
-          "recipe_id": 2,
-          "user_id": 1,
-          "title": "Another Title",
-          "source": "Another Source",
-          "category_id": 2
-      },
-    ]
-    ```
- 
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ message: 'This user has no recipes saved.' }`
-
-  OR
-
-  * **Code:** 500 SERVER ERROR <br />
-    **Content:** `{ message: "(relevant message will be returned)" }`
-  
----
-
-### ***GET /recipes/:id***
-
-*  **Request Body:**
- 
-   ```
-   no body required. empty body accepted.
-   ```
-
-* **Success Response:**
-
- * **Code:** 200 <br />
-    **Content:** 
-    
-    ```
-    [
-      {
-          "recipe_id": 1,
-          "user_id": 1,
-          "title": Example Title,
-          "source": "Example Source",
-          "category_id": 1
-      }
-    ]
-    ```
- 
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ message: 'Provided recipe_id does not exist.' }`
-
-  OR
-
-  * **Code:** 500 SERVER ERROR <br />
-    **Content:** `{ message: "(relevant message will be returned)" }`
-  
-
----
-
-### ***PUT /recipes/:id***
-
-*  **Request Body:**
- 
- ```
-      {
-          "title": Update Title,
-          "source": "Update Source",
-          "category_id": 3
-      }   
- ```
-
-* **Success Response:**
-
- * **Code:** 200 <br />
-    **Content:** 
-    
-    ```
-    [
-      {
-          "recipe_id": 1,
-          "user_id": 1,
-          "title": Update Title,
-          "source": "Update Source",
-          "category_id": 3
-      }
-    ]
-    ```
- 
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ message: 'Provided recipe_id does not exist.' }`
-
-  OR
-
-  * **Code:** 500 SERVER ERROR <br />
-    **Content:** `{ message: "(relevant message will be returned)" }`
-  
----
-
-### ***POST /newrecipe***
+### ***POST /recipes***
 
 *  **Request Body:**
  
@@ -233,7 +110,10 @@ Success will return status code 200 and message. Failure will return error.
    {
       "title": The Best Lasagna,  #required
       "source": "Family Secret",  #required
-      "category_id": 1            #required
+      "category": "dinner",        #required
+      "instructions": "add ground beef, layered with the goodness of sheet lasagna    pasta, and sprinkle mozzamagic", #required
+      "ingredients": "1lb of ground beef, sheet lasagna pasta, 3 cups mozzarella" #required
+      "username": "coolChef"        #required
    }
    ```
   
@@ -252,4 +132,132 @@ Success will return status code 200 and message. Failure will return error.
   * **Code:** 500 SERVER ERROR <br />
     **Content:** `{ message: "(relevant message will be returned)" }`
 
+---
+
+### ***GET /recipes/:username***
+
+*  **Request Body:**
+ 
+   ```
+   no body required. empty body accepted.
+   ```
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** 
+    
+    ```
+    [
+    {
+     "recipe_id": 1,
+      "title": The Best Lasagna,  #required
+      "source": "Family Secret",  #required
+      "category": "dinner",        #required
+      "instructions": "add ground beef, layered with the goodness of sheet lasagna    pasta, and sprinkle mozzamagic", #required
+      "ingredients": "1lb of ground beef, sheet lasagna pasta, 3 cups mozzarella", #required
+      "username": "coolChef"        #required
+     }
+    ]
+    ```
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ message: 'This user has no recipes saved.' }`
+
+  OR
+
+  * **Code:** 500 SERVER ERROR <br />
+    **Content:** `{ message: "(relevant message will be returned)" }`
+  
+---
+
+### ***GET /recipes/:username/:id***
+
+*  **Request Body:**
+ 
+   ```
+   no body required. empty body accepted.
+   ```
+
+* **Success Response:**
+
+ * **Code:** 200 <br />
+    **Content:** 
+    
+    ```
+    [
+       {
+     "recipe_id": 1,
+      "title": The Best Lasagna,  #required
+      "source": "Family Secret",  #required
+      "category": "dinner",        #required
+      "instructions": "add ground beef, layered with the goodness of sheet lasagna    pasta, and sprinkle mozzamagic", #required
+      "ingredients": "1lb of ground beef, sheet lasagna pasta, 3 cups mozzarella", #required
+      "username": "coolChef"        #required
+     }
+    ]
+    ```
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ message: 'Provided recipe_id does not exist.' }`
+
+  OR
+
+  * **Code:** 500 SERVER ERROR <br />
+    **Content:** `{ message: "(relevant message will be returned)" }`
+  
+
+---
+
+### ***PUT /recipes/:username/:id***
+
+*  **Request Body:**
+ 
+ ```
+ [
+      {
+      "title": The Best Lasagna,  #optional
+      "source": "Family Secret",  #optional
+      "category": "dinner",        #optional
+      "instructions": "add ground beef, sub sheet lasagna with sliced eggplants, and sprinkle mozzamagic", #optional
+      "ingredients": "1lb of ground beef, sliced eggplants, 3 cups mozzarella", #optional
+      "username": "coolChef"        #optional
+      }   
+ ]
+ ```
+
+* **Success Response:**
+
+ * **Code:** 200 <br />
+    **Content:** 
+    
+    ```
+    [
+      {
+      "recipe_id": 1,
+      "title": The Best Lasagna, 
+      "source": "Family Secret",  
+      "category": "dinner",        
+      "instructions": "add ground beef, sub sheet lasagna with sliced eggplants, and sprinkle mozzamagic", 
+      "ingredients": "1lb of ground beef, sliced eggplants, 3 cups mozzarella", 
+      "username": "coolChef"     
+      }   
+      }
+    ]
+    ```
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ message: 'Provided recipe_id does not exist.' }`
+
+  OR
+
+  * **Code:** 500 SERVER ERROR <br />
+    **Content:** `{ message: "(relevant message will be returned)" }`
+  
 ---
