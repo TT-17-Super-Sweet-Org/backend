@@ -18,7 +18,7 @@ router.get('/:username', userHasRecipes, (req,res) => {
 router.post('/', recipeBody, (req,res) => {
     Recipes.add(req.body)
     .then(recipe => {
-        res.status(200).json(recipe);
+        res.status(201).json(recipe);
     })
     .catch(error => {
         next(error)
