@@ -3,7 +3,7 @@
 ## 1️⃣ Getting Started
 
 ### API Base URL 
-`https://supersweetorg.herokuapp.com/api`
+TBD
 
 ### To confirm the API is online...
 Send a GET request to the base URL. No headers or body is required for this test. 
