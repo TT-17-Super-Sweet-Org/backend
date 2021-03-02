@@ -2,6 +2,7 @@ require('dotenv').config({path: './.env'})
 const pg = require('pg')
 
 
+//eslint-disable-next-line
 if (process.env.DATABASE_URL) {
   pg.defaults.ssl = { rejectUnauthorized: false }
 }
@@ -14,15 +15,15 @@ const sharedConfig = {
 
 module.exports = {
   development: {
-    ...sharedConfig,
+    ...sharedConfig,   //eslint-disable-next-line
     connection: process.env.DEV_DATABASE_URL,
   },
   testing: {
-    ...sharedConfig,
+    ...sharedConfig,   //eslint-disable-next-line
     connection: process.env.TESTING_DATABASE_URL,
   },
   production: {
-    ...sharedConfig,
+    ...sharedConfig,   //eslint-disable-next-line
     connection: process.env.DATABASE_URL,
     pool: { min: 2, max: 10 },
   },

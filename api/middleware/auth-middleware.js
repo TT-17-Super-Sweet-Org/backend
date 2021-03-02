@@ -7,7 +7,6 @@ module.exports = {
 
 async function uniqueUsername(req, res, next){
     const { username } = req.body
-    console.log(username)
     const user = await Users.getBy(username)
     if(!user){
         next()

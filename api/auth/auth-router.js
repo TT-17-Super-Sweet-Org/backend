@@ -6,8 +6,8 @@ const { jwtSecret } = require('../../config/secret')
 const { uniqueUsername, validateUser } = require('../middleware/auth-middleware')
 
 router.post('/register', uniqueUsername, validateUser, (req, res, next) =>{
-    const user = req.body
-    const rounds = process.env.BCRYPT_ROUNDS || 10
+    const user = req.body     //eslint-disable-next-line
+    const rounds = process.env.BCRYPT_ROUNDS || 10   
     const hash = bcrypt.hashSync(req.body.password, rounds)
 
     user.password = hash
