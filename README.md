@@ -19,7 +19,7 @@ Send a GET request to the base URL. No headers or body is required for this test
 |GET | /recipes/:username | returns all recipes for that user | Y |
 |GET | /recipes/:username/:id | returns recipe for that user at specified recipe_id | Y |
 |PUT | /recipes/:username/:id | updates recipe for that user at specified recipe_id | Y |
-|NOTE | Users should create at least one recipe ||Y|
+|NOTE | | Users should create at least one recipe |Y|
 </br>
 
 ---
