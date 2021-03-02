@@ -7,8 +7,7 @@
 
 ### To confirm the API is online...
 Send a GET request to the base URL. No headers or body is required for this test. 
-Success will return status code 200. Failure will return error.  
-
+Success will return status code 200 and message. Failure will return error.  
 ---
 ## 2️⃣ Endpoints Overview
 
@@ -17,10 +16,11 @@ Success will return status code 200. Failure will return error.
 |----------|----------|----------|----------|
 |POST | /auth/register | registers a new user | N |
 |POST | /auth/login | login an existing user | N |
-|GET | /recipes/:username | returns recipes for that user | Y |
 |POST | /recipes| saves a new recipe to db | Y |
-|GET | /recipes/:username/:id | returns recipe for that user's recipe_id | Y |
-|PUT | /recipes/:username/:id | updates recipe for that user's recipe_id | Y |
+|GET | /recipes/:username | returns all recipes for that user | Y |
+|GET | /recipes/:username/:id | returns recipe for that user at specified recipe_id | Y |
+|PUT | /recipes/:username/:id | updates recipe for that user at specified recipe_id | Y |
+|NOTE | Users should create at least one recipe | Y |
 </br>
 
 ---
