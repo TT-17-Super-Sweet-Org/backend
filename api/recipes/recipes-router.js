@@ -1,43 +1,43 @@
 const express = require('express'); 
 const Recipes = require('./recipes-model'); 
-const mw = require('../middleware/recipes-middleware');
+const { recipeBody, userHasRecipes, recipeExists} = require('../middleware/recipes-middleware');
 
 const router = express.Router(); 
 
-router.get('/:username', (req,res) => {
+router.get('/:username', userHasRecipes, (req,res) => {
     const username = req.params.username;
     Recipes.getRecipes(username)
     .then(recipes => {
         res.status(200).json(recipes);
     })
-    .catch(err => {
-        res.status(500).json({message: err.message})
+    .catch(error => {
+        next(error)
     })
 })
 
-router.post('/', (req,res) => {
-    Recipes.getById(req.body)
+router.post('/', recipeBody, (req,res) => {
+    Recipes.add(req.body)
     .then(recipe => {
         res.status(200).json(recipe);
     })
-    .catch(err => {
-        res.status(500).json({message: err.message})
+    .catch(error => {
+        next(error)
     })
 })
 
-router.get('/:username/:id', (req,res) => {
+router.get('/:username/:id', recipeExists, (req,res) => {
     const username = req.params.username;
     const id = req.params.id;
     Recipes.getRecipesById(username, id)
     .then(recipe => {
         res.status(200).json(recipe);
     })
-    .catch(err => {
-        res.status(500).json({message: err.message})
+    .catch(error => {
+        next(error)
     })
 })
 
-router.put('/:username/:id', (req,res) => {
+router.put('/:username/:id', recipeExists, recipeBody, (req,res) => {
     const username = req.params.username;
     const id = req.params.id;
     const changes = req.body;
@@ -45,7 +45,17 @@ router.put('/:username/:id', (req,res) => {
     .then(recipe => {
         res.status(200).json(recipe);
     })
-    .catch(err => {
-        res.status(500).json({message: err.message})
+    .catch(error => {
+        next(error)
     })
 })
+
+router.use((error, req, res, next) =>{
+    res.status(500).json({
+        info: 'An error occured inside the recipesRouter',
+        message: error.message,
+        stack: error.stack,
+    })
+})
+
+module.exports = router;

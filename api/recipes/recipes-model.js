@@ -15,8 +15,8 @@ function getRecipes(username) {
 function getRecipesById(username, id) {
     return db('recipes')
     .where({
-        username: username,
-        id: id
+        recipe_id: id,
+        username: username
     })
 }
 
