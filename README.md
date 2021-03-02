@@ -19,8 +19,8 @@ Success will return status code 200. Failure will return error.
 |POST | /auth/login | login an existing user | N |
 |GET | /recipes/:username | returns recipes for that user | Y |
 |POST | /recipes| saves a new recipe to db | Y |
-|GET | /recipes/:id | returns recipe for that recipe_id | Y |
-|PUT | /recipes/:id | updates recipe for that recipe_id | Y |
+|GET | /recipes/:username/:id | returns recipe for that user's recipe_id | Y |
+|PUT | /recipes/:username/:id | updates recipe for that user's recipe_id | Y |
 </br>
 
 ---
