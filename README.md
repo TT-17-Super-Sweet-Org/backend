@@ -3,7 +3,7 @@
 ## 1️⃣ Getting Started
 
 ### API Base URL 
-`https://supersweetorg.herokuapp.com/api`
+`https://tt17-secret-family-recipe.herokuapp.com/api`
 
 ### To confirm the API is online...
 Send a GET request to the base URL. No headers or body is required for this test. 
@@ -17,7 +17,7 @@ Success will return status code 200. Failure will return error.
 |----------|----------|----------|----------|
 |POST | /auth/register | registers a new user | N |
 |POST | /auth/login | login an existing user | N |
-|GET | /recipes | returns recipes for that user_id | Y |
+|GET | /recipes/:username | returns recipes for that user | Y |
 |POST | /recipes| saves a new recipe to db | Y |
 |GET | /recipes/:id | returns recipe for that recipe_id | Y |
 |PUT | /recipes/:id | updates recipe for that recipe_id | Y |

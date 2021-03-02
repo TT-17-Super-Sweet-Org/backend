@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "`https://supersweetorg.herokuapp.com/api`",
+  "description": "`https://tt17-secret-family-recipe.herokuapp.com/`",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,10 +9,10 @@
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
-    "migrateh": "heroku run knex migrate:latest -a heroku-app-name-goes-here",
-    "rollbackh": "heroku run knex migrate:rollback -a heroku-app-name-goes-here",
-    "databaseh": "heroku pg:psql -a heroku-app-name-goes-here",
-    "seedh": "heroku run knex seed:run -a heroku-app-name-goes-here",
+    "migrateh": "heroku run knex migrate:latest -a tt17-secret-family-recipe",
+    "rollbackh": "heroku run knex migrate:rollback -a tt17-secret-family-recipe",
+    "databaseh": "heroku pg:psql -a tt17-secret-family-recipe",
+    "seedh": "heroku run knex seed:run -a tt17-secret-family-recipe",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
