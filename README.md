@@ -20,7 +20,7 @@ Success will return status code 200 and message. Failure will return error.
 |GET | /recipes/:username | returns all recipes for that user | Y |
 |GET | /recipes/:username/:id | returns recipe for that user at specified recipe_id | Y |
 |PUT | /recipes/:username/:id | updates recipe for that user at specified recipe_id | Y |
-|NOTE | Users should create at least one recipe ||| Y |
+|NOTE | Users should create at least one recipe ||Y|
 </br>
 
 ---
