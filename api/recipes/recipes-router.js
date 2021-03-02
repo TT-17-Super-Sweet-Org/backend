@@ -15,9 +15,8 @@ router.get('/:username', (req,res) => {
     })
 })
 
-router.get('/:id', (req,res) => {
-    const id = req.params.id
-    Recipes.getById(id)
+router.post('/', (req,res) => {
+    Recipes.getById(req.body)
     .then(recipe => {
         res.status(200).json(recipe);
     })
@@ -26,4 +25,27 @@ router.get('/:id', (req,res) => {
     })
 })
 
-router.post('/:id')
+router.get('/:username/:id', (req,res) => {
+    const username = req.params.username;
+    const id = req.params.id;
+    Recipes.getRecipesById(username, id)
+    .then(recipe => {
+        res.status(200).json(recipe);
+    })
+    .catch(err => {
+        res.status(500).json({message: err.message})
+    })
+})
+
+router.put('/:username/:id', (req,res) => {
+    const username = req.params.username;
+    const id = req.params.id;
+    const changes = req.body;
+    Recipes.update(username, id, changes)
+    .then(recipe => {
+        res.status(200).json(recipe);
+    })
+    .catch(err => {
+        res.status(500).json({message: err.message})
+    })
+})
