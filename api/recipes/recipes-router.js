@@ -4,8 +4,8 @@ const { recipeBody, userHasRecipes, recipeExists} = require('../middleware/recip
 
 const router = express.Router(); 
 
-router.get('/:username', userHasRecipes, (req,res) => {
-    const username = req.params.username;
+router.get('/:username', userHasRecipes, (req,res, next) => {
+    const username = req.body.username;
     Recipes.getRecipes(username)
     .then(recipes => {
         res.status(200).json(recipes);
@@ -15,7 +15,7 @@ router.get('/:username', userHasRecipes, (req,res) => {
     })
 })
 
-router.post('/', recipeBody, (req,res) => {
+router.post('/', recipeBody, (req,res, next) => {
     Recipes.add(req.body)
     .then(recipe => {
         res.status(201).json(recipe);
@@ -25,9 +25,9 @@ router.post('/', recipeBody, (req,res) => {
     })
 })
 
-router.get('/:username/:id', recipeExists, (req,res) => {
-    const username = req.params.username;
-    const id = req.params.id;
+router.get('/:username/:id', recipeExists, (req,res, next) => {
+    const username = req.body.username;
+    const { id } = req.params;
     Recipes.getRecipesById(username, id)
     .then(recipe => {
         res.status(200).json(recipe);
@@ -37,9 +37,9 @@ router.get('/:username/:id', recipeExists, (req,res) => {
     })
 })
 
-router.put('/:username/:id', recipeExists, recipeBody, (req,res) => {
-    const username = req.params.username;
-    const id = req.params.id;
+router.put('/:username/:id', recipeExists, recipeBody, (req,res, next) => {
+    const username = req.body.username;
+    const { id } = req.params;
     const changes = req.body;
     Recipes.update(username, id, changes)
     .then(recipe => {

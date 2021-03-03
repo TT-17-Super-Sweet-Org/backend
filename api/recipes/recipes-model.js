@@ -8,8 +8,9 @@ module.exports = {
     remove
 }
 function getRecipes(username) {
-    return db('recipes')
-    .where("username", username)
+    return db('recipes as r')
+    .join('users as u', 'u.username', 'r.username')
+    .where("r.username", username)
 }
 
 function getRecipesById(username, id) {
