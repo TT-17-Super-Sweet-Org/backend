@@ -2,20 +2,20 @@
 exports.up = function(knex) {
   return knex.schema
   .createTable('users', tbl =>{
-      tbl.increments('user_id')
+      tbl.increments()
       tbl.string('username').notNullable().unique()
       tbl.string('password').notNullable()
   })
 
   .createTable('recipes', tbl =>{
-      tbl.increments('recipe_id')
+      tbl.increments()
       tbl.string('title', 50).notNullable()
       tbl.string('source', 50).notNullable()
       tbl.string('category', 50).notNullable()
       tbl.string('instructions').notNullable()
       tbl.string('ingredients', 2000).notNullable()
-      tbl.string('username').notNullable()
-        .references('username')
+      tbl.integer('user_id').unsigned().notNullable()
+        .references('id')
         .inTable('users')
         .onUpdate('CASCADE')
         .onDelete('RESTRICT')
