@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const { jwtSecret } = require('../../config/secret')
 const { uniqueUsername, validateUser } = require('../middleware/auth-middleware')
 
-router.post('/register', uniqueUsername, validateUser, (req, res, next) =>{
+router.post('/register', uniqueUsername, validateUser, (req, res) =>{
     const user = req.body     //eslint-disable-next-line
     const rounds = process.env.BCRYPT_ROUNDS || 10   
     const hash = bcrypt.hashSync(req.body.password, rounds)
