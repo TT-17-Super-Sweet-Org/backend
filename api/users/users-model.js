@@ -6,10 +6,11 @@ module.exports ={
     getById,
     add,
     updateUser,
+    getUserRecipes
 }
 
 function get() {
-    return db('users').orderBy('user_id')
+    return db('users').orderBy('id')
 }
 
 function getBy(username){
@@ -17,14 +18,21 @@ function getBy(username){
 }
 
 function getById(id) {
-    return db('users').where('user_id', id).first()
+    return db('users').where('id', id).first()
 }
 
 async function add(user) {
-    const [id] = await db('users').insert(user, 'user_id')
+    const [id] = await db('users').insert(user, 'id')
     return getById(id)
 }
 
 function updateUser(changes, id) {
-    return db('users').where('user_id', id).update(changes)
+    return db('users').where('id', id).update(changes)
+}
+
+function getUserRecipes(userId){
+    return db('recipes as r')
+    .join('users as u', 'u.id', 'r.user_id')
+    .select('u.id', 'r.title')
+    .where('r.id', userId)
 }

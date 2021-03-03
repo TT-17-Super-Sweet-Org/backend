@@ -2,7 +2,8 @@ const Users = require('../users/users-model')
 
 module.exports = {
     uniqueUsername,
-    validateUser
+    validateUser,
+    validateUserId
 }
 
 async function uniqueUsername(req, res, next){
@@ -20,6 +21,18 @@ function validateUser(req, res, next){
 
     if(!username || !password){
         res.status(400).json({message: 'Username or password missing'})
+    } else{
+        next()
+    }
+}
+
+
+async function validateUserId(req, res, next){
+    const { id } = req.params
+    const user = await Users.getById(id)
+
+    if(!user){
+        res.status(400).json({message: 'User not found'})
     } else{
         next()
     }
