@@ -30,8 +30,8 @@ Recipes.getRecipesByUser(username)
 //creates new recipe, check response
 router.post('/', (req,res, next) => {
     Recipes.add(req.body)
-    .then(recipe => {
-        res.status(201).json(recipe);
+    .then(recipes => {
+        res.status(201).json(recipes[0]);
     })
     .catch(error => {
         next(error)

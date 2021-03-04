@@ -6,14 +6,14 @@ userHasRecipes,
 recipeExists
 }
 
-// function recipeBody (req, res, next){
-// const { title, source, category, instructions, ingredients, username } = req.body; 
-// if (!title || ! source || !category || !instructions || !ingredients || !username){
-//     res.status(400).json({message: "All fields must be filled out :'("})
-// } else {
-//     next();
-// }
-// }
+function recipeBody (req, res, next){
+const { title, source, category, instructions, ingredients, username } = req.body; 
+if (!title || !source || !category || !instructions || !ingredients || !username){
+    res.status(400).json({message: "All fields must be filled out :'("})
+} else {
+    next();
+}
+}
 
 async function userHasRecipes(req, res, next){
     const {username} = req.params;
