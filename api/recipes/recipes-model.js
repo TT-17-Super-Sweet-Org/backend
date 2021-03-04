@@ -2,35 +2,34 @@ const db = require('../../data/dbConfig')
 
 module.exports = {
     get,
-    getById, 
     getRecipesById,
+    getRecipesByUser,
     add, 
     update,
     remove
 }
 
-function get(){
+function get(){ 
     return db('recipes')
-}
-
-function getById(id) {
-    return db('recipes').where({id}).first()
 }
 
 function getRecipesById(username, id) {
     return db('recipes')
     .where({
-        recipe_id: id,
+        id: id,
         username: username
     })
 }
 
-function add(newRecipe) {
+function getRecipesByUser(username) {
     return db('recipes')
-    .insert(newRecipe)
-    .then(ids => {
-        return getById(ids[0]);
-      });
+    .where("username", username)
+}
+
+function add(recipe) {
+    return db("recipes")
+    .insert(recipe)
+
 }
 
 function update(username, id, changes){
@@ -41,13 +40,16 @@ function update(username, id, changes){
     })
     .update(changes)
     .then(()=> {
-        return db('recipes').where('recipes_id', id).first()
+        return db('recipes').where('id', id).first()
     })
 }
 
-function remove(id) {
+function remove(username, id) {
     return db('recipes')
-    .where("recipes_id", id)
+    .where({
+        id: id,
+        username: username
+    })
     .del()
 }
 
