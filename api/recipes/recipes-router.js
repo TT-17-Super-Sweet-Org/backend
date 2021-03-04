@@ -15,13 +15,19 @@ router.get('/', (req, res, next) =>{
     })
 })
 
-//get recipe by id
-router.get('/:id', validateRecipeId, (req,res, next) => {
-    res.status(200).json(req.recipe)
+//get recipes created by username
+router.get('/:username', userHasRecipes, (req,res, next) => {
+const {username} = req.params; 
+Recipes.getRecipesByUser(username)
+.then(recipes => {
+    res.status(200).json(recipes)
+})
+.catch(error => {
+    next(error)
+})
 })
 
-
-// fix/debug
+//creates new recipe, does not have pretty response
 router.post('/', recipeBody, (req,res, next) => {
     Recipes.add(req.body)
     .then(recipe => {
@@ -32,12 +38,10 @@ router.post('/', recipeBody, (req,res, next) => {
     })
 })
 
-//  fix/debug
+//gets recipe created by user at the recipe id
 router.get('/:username/:id', recipeExists, (req,res, next) => {
-    const username = req.body.username;
     const { id } = req.params;
-
-    console.log(id)
+    const { username } = req.params;
     Recipes.getRecipesById(username, id)
     .then(recipe => {
         res.status(200).json(recipe);
@@ -47,10 +51,10 @@ router.get('/:username/:id', recipeExists, (req,res, next) => {
     })
 })
 
-// fix/debug
+// updates recipe for username and their recipe id
 router.put('/:username/:id', recipeExists, recipeBody, (req,res, next) => {
-    const username = req.body.username;
-    const { id } = req.params;
+    const username = req.params.username;
+    const id = req.params.id;
     const changes = req.body;
     Recipes.update(username, id, changes)
     .then(recipe => {
@@ -61,10 +65,24 @@ router.put('/:username/:id', recipeExists, recipeBody, (req,res, next) => {
     })
 })
 
+//deletes recipes for user at recipe's id
+router.delete('/:username/:id', recipeExists, (req,res, next) => {
+    const {username} = req.params;
+    const {id} = req.params;
+    Recipes.remove(username, id)
+    .then(()=>{
+        res.status(200).json({message:"recipe deleted"});
+    })
+    .catch(error => {
+        next(error)
+    })
+})
+
 router.use((error, req, res, next) =>{
     res.status(500).json({
         info: 'An error occured inside the recipesRouter',
         message: error.message,
+        detail: error.detail,
         stack: error.stack,
     })
 })

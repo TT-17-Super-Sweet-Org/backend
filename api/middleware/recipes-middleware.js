@@ -18,8 +18,8 @@ if (!title || ! source || !category || !instructions || !ingredients || !usernam
 }
 
 async function userHasRecipes(req, res, next){
-    const username = req.body.username
-    const list = await Recipes.getRecipes(username)
+    const {username} = req.params;
+    const list = await Recipes.getRecipesByUser(username)
     if(list.length === 0){
         res.status(404).json({message: "This user does not have any recipes yet."})
     } else {
@@ -28,8 +28,8 @@ async function userHasRecipes(req, res, next){
 }
 
 async function recipeExists (req, res, next){
+    const { username } = req.params
     const {id} = req.params
-    const{ username } = req.body
     const recipe = await Recipes.getRecipesById(username, id)
     if (!recipe){
         res.status(404).json({message: "Provided recipe_id for this user does not exist."})

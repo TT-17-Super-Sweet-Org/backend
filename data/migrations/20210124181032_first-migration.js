@@ -14,11 +14,7 @@ exports.up = function(knex) {
       tbl.string('category', 50).notNullable()
       tbl.string('instructions').notNullable()
       tbl.string('ingredients', 2000).notNullable()
-      tbl.integer('user_id').unsigned().notNullable()
-        .references('id')
-        .inTable('users')
-        .onUpdate('CASCADE')
-        .onDelete('RESTRICT')
+      tbl.string('username').notNullable()
   })
   
 };
