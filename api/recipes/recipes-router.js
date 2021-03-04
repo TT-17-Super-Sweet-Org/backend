@@ -28,7 +28,7 @@ Recipes.getRecipesByUser(username)
 })
 
 //creates new recipe, check response
-router.post('/', recipeBody, (req,res, next) => {
+router.post('/', (req,res, next) => {
     Recipes.add(req.body)
     .then(recipe => {
         res.status(201).json(recipe);

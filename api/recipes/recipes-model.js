@@ -27,9 +27,11 @@ function getRecipesByUser(username) {
 }
 
 function add(recipe) {
-    return db("recipes")
-    .insert(recipe)
-
+return db('recipes').insert(recipe)
+.then((ids)=> {
+const id = ids[0];
+db('recipes').where({id}).first()
+})
 }
 
 function update(username, id, changes){
