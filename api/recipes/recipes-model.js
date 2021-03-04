@@ -27,7 +27,7 @@ function getRecipesByUser(username) {
 }
 
 function add(recipe) {
-return db('recipes').insert(recipe, ["title", "source", "username", "category", "ingredients", "instructions"])
+return db('recipes').insert(recipe, ["title", "source", "username", "category", "ingredients", "instructions", "id"])
 }
 
 function update(username, id, changes){
