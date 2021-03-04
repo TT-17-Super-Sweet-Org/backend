@@ -3,9 +3,7 @@ const Recipes = require('../recipes/recipes-model');
 module.exports = {
 recipeBody, 
 userHasRecipes,
-recipeExists,
-validateRecipeId,
-validateRecipe
+recipeExists
 }
 
 function recipeBody (req, res, next){
@@ -35,34 +33,5 @@ async function recipeExists (req, res, next){
         res.status(404).json({message: "Provided recipe_id for this user does not exist."})
     } else{
         next()
-    }
-}
-
-async function validateRecipeId (req, res, next){
-    const {id} = req.params
-  try{
-    const recipe = await Recipes.getById(id);
-    if(!recipe){
-      res.status(400).json({message: 'Recipe not found'});
-    } else{
-      req.recipe = recipe
-      next();
-    }
-  } catch(error){
-    res.status(500).json({message: 'Recipe could not be retrieved'});
-  }
-}
-
-function validateRecipe(req, res, next){
-    const { title, source, category, instructions, ingredients, user_id } = req.body
-
-    try{
-        if(!title || ! source || !category || !instructions || !ingredients || !user_id){
-            res.status(400).json({message: 'Missing recipe data'})
-        } else{
-            next()
-        }
-    } catch(error){
-        res.status(400).json({message: 'Missing required inputs'})
     }
 }

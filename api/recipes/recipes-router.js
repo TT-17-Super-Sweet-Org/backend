@@ -27,7 +27,7 @@ Recipes.getRecipesByUser(username)
 })
 })
 
-//creates new recipe, does not have pretty response
+//creates new recipe, check response
 router.post('/', recipeBody, (req,res, next) => {
     Recipes.add(req.body)
     .then(recipe => {
