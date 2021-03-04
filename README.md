@@ -125,7 +125,7 @@ Send a GET request to the base URL. No headers or body is required for this test
     
     ```
     {
-        "title": "The Best Lasagna",  #required
+      "title": "The Best Lasagna",  #required
       "source": "Family Secret",  #required
       "category": "dinner",        #required
       "instructions": "add ground beef, layered with the goodness of sheet lasagna    pasta, and sprinkle mozzamagic", #required
@@ -161,8 +161,8 @@ Send a GET request to the base URL. No headers or body is required for this test
     
     ```
     [
-    {
-     "recipe_id": 1,
+     {
+     "id": 1,
       "title": "The Best Lasagna",  #required
       "source": "Family Secret",  #required
       "category": "dinner",        #required
@@ -200,8 +200,8 @@ Send a GET request to the base URL. No headers or body is required for this test
     
     ```
     [
-       {
-     "recipe_id": 1,
+      {
+      "id": 1,
       "title": "The Best Lasagna",  #required
       "source": "Family Secret",  #required
       "category": "dinner",        #required
@@ -230,7 +230,6 @@ Send a GET request to the base URL. No headers or body is required for this test
 *  **Request Body:**
  
  ```
- [
       {
       "title": "The Best KETO Lasagna",  #optional
       "source": "Family Secret",  #optional
@@ -239,7 +238,6 @@ Send a GET request to the base URL. No headers or body is required for this test
       "ingredients": "1lb of ground beef, sliced eggplants, 3 cups mozzarella", #optional
       "username": "coolChef"        #optional
       }   
- ]
  ```
 
 * **Success Response:**
@@ -248,9 +246,8 @@ Send a GET request to the base URL. No headers or body is required for this test
     **Content:** 
     
     ```
-    [
       {
-      "recipe_id": 1,
+      "id": 1,
       "title": "The Best KETO Lasagna", 
       "source": "Family Secret",  
       "category": "dinner",        
@@ -258,7 +255,6 @@ Send a GET request to the base URL. No headers or body is required for this test
       "ingredients": "1lb of ground beef, sliced eggplants, 3 cups mozzarella", 
       "username": "coolChef"     
       } 
-    ]
     ```
  
 * **Error Response:**
