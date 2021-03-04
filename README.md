@@ -19,6 +19,7 @@ Send a GET request to the base URL. No headers or body is required for this test
 |GET | /recipes/:username | returns all recipes for that user | Y |
 |GET | /recipes/:username/:id | returns recipe for that user at specified recipe_id | Y |
 |PUT | /recipes/:username/:id | updates recipe for that user at specified recipe_id | Y |
+|DELETE | /recipes/:username/:id | deletes recipe for that user at specified recipe_id | Y |
 |NOTE | | Users should create at least one recipe |Y|
 </br>
 
@@ -43,7 +44,7 @@ Send a GET request to the base URL. No headers or body is required for this test
     
     ```
     {
-        "user_id": 1,
+        "id": 1,
         "username": "coolChef", 
         "password": (encrypted token)
     }
@@ -93,7 +94,7 @@ Send a GET request to the base URL. No headers or body is required for this test
   OR
 
   * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ message: "Invalid credentials." }`
+    **Content:** `{ message: "Invalid credentials" }`
 
   OR
 
@@ -214,7 +215,7 @@ Send a GET request to the base URL. No headers or body is required for this test
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ message: 'Provided recipe_id does not exist.' }`
+    **Content:** `{ message: 'Provided recipe_id for this user does not exist.' }`
 
   OR
 
@@ -263,12 +264,42 @@ Send a GET request to the base URL. No headers or body is required for this test
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ message: 'Provided recipe_id does not exist.' }`
+    **Content:** `{ message: 'Provided recipe_id for this user does not exist.' }`
 
   OR
   
    * **Code:** 400 BAD REQUEST <br />
     **Content:** `{ message: "All fields must be filled out :'(" }`
+
+  OR
+
+  * **Code:** 500 SERVER ERROR <br />
+    **Content:** `{ message: "(relevant message will be returned)" }`
+  
+---
+### ***DELETE /recipes/:username/:id***
+
+*  **Request Body:**
+ 
+ ```
+   no body required. empty body accepted.
+ ```
+
+* **Success Response:**
+
+ * **Code:** 200 <br />
+    **Content:** 
+    
+    ```
+      {
+        "message": "recipe deleted"     
+      } 
+    ```
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ message: 'Provided recipe_id for this user does not exist.' }`
 
   OR
 
