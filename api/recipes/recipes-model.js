@@ -27,11 +27,7 @@ function getRecipesByUser(username) {
 }
 
 function add(recipe) {
-return db('recipes').insert(recipe)
-.then((ids)=> {
-const id = ids[0];
-db('recipes').where({id}).first()
-})
+return db('recipes').insert(recipe, ["title", "source", "username", "category", "ingredients", "instructions"])
 }
 
 function update(username, id, changes){
