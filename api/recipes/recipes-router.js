@@ -1,6 +1,6 @@
 const express = require('express'); 
 const Recipes = require('./recipes-model'); 
-const { recipeBody, userHasRecipes, recipeExists, validateRecipeId} = require('../middleware/recipes-middleware');
+const { recipeBody, userHasRecipes, recipeExists} = require('../middleware/recipes-middleware');
 
 const router = express.Router(); 
 

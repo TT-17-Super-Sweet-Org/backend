@@ -29,9 +29,9 @@ async function userHasRecipes(req, res, next){
 
 async function recipeExists (req, res, next){
     const { username } = req.params
-    const {id} = req.params
+    const { id } = req.params
     const recipe = await Recipes.getRecipesById(username, id)
-    if (!recipe){
+    if (recipe.length === 0){
         res.status(404).json({message: "Provided recipe_id for this user does not exist."})
     } else{
         next()
