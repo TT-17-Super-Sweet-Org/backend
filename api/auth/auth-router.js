@@ -23,11 +23,11 @@ router.post('/register', uniqueUsername, validateUser, (req, res) =>{
 
 router.post('/login', validateUser, async (req, res) =>{
     const { username, password } = req.body
-    const user = await Users.getBy(username)
+    const randomUser = await Users.getBy(username)
 
-    if(user && bcrypt.compareSync(password, user.password)){
-        const token = makeToken(user)
-        res.status(200).json({message: user.username, token})
+    if(randomUser && bcrypt.compareSync(password, randomUser.password)){
+        const token = makeToken(randomUser)
+        res.status(200).json({message: `Welcome to API ${randomUser.username}`, user:randomUser.username, token})
     } else{
         res.status(401).json({message: 'Invalid credentials'})
     }
