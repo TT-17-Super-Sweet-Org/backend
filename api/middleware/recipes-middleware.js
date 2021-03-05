@@ -19,7 +19,7 @@ async function userHasRecipes(req, res, next){
     const {username} = req.params;
     const list = await Recipes.getRecipesByUser(username)
     if(list.length === 0){
-        res.status(404).json({message: "This user does not have any recipes yet."})
+        res.status(204).json({message: "This user does not have any recipes yet."})
     } else {
         next()
     }
